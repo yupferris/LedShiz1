@@ -21,28 +21,23 @@ always @ (posedge clk_50) begin
 		pwm_pos <= pwm_pos + 1;
 		led_state <= pwm_pos >= pwm_width;
 		pwm_counter <= 0;
-	end else begin
+	end else
 		pwm_counter <= pwm_counter + 1;
-	end
 	
 	if (pwm_width_counter == 32'd100000 - 1) begin
-		if (pwm_width_dir == 0) begin
-			if (pwm_width == 8'hff) begin
+		if (pwm_width_dir == 0)
+			if (pwm_width == 8'hff)
 				pwm_width_dir <= ~pwm_width_dir;
-			end else begin
+			else
 				pwm_width <= pwm_width + 1;
-			end
-		end else begin
-			if (pwm_width == 0) begin
+		else
+			if (pwm_width == 0)
 				pwm_width_dir <= ~pwm_width_dir;
-			end else begin
+			else
 				pwm_width <= pwm_width - 1;
-			end
-		end
 		pwm_width_counter <= 0;
-	end else begin
+	end else
 		pwm_width_counter <= pwm_width_counter + 1;
-	end
 end
 
 endmodule

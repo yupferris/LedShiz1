@@ -3,32 +3,17 @@ module LedShiz01(
 	output [3:0] leds
 );
 
-PwmLed #(
-	.DEFAULT_PWM_WIDTH(8'h00)
-) led0 (
-	.clk_50(clk_50),
-	.led(leds[0])
+`define led(default_pwm_width, index) \
+PwmLed #( \
+	.DEFAULT_PWM_WIDTH(default_pwm_width) \
+) ( \
+	.clk_50(clk_50), \
+	.led(leds[index]) \
 );
 
-PwmLed #(
-	.DEFAULT_PWM_WIDTH(8'h40)
-) led1 (
-	.clk_50(clk_50),
-	.led(leds[1])
-);
-
-PwmLed #(
-	.DEFAULT_PWM_WIDTH(8'h80)
-) led2 (
-	.clk_50(clk_50),
-	.led(leds[2])
-);
-
-PwmLed #(
-	.DEFAULT_PWM_WIDTH(8'hc0)
-) led3 (
-	.clk_50(clk_50),
-	.led(leds[3])
-);
+`led(8'h00, 0)
+`led(8'h40, 1)
+`led(8'h80, 2)
+`led(8'hc0, 3)
 
 endmodule
